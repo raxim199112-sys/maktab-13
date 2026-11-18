@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="uz"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>13-maktab</title>
+<script src="https://cdn.tailwindcss.com/3.4.17"></script><style>artifact-sync,artifact-local{display:contents}</style>
+<style>html,body{width:100%;height:100%;margin:0}html{scroll-behavior:smooth;color-scheme:light}body{background:#f8fafc;color:#1e293b;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;-webkit-text-size-adjust:100%}
+input,select,textarea{font-size:16px!important}
+@keyframes bar{from{width:0}to{width:100%}}.bar{animation:bar 5s linear forwards}</style>
+<style>artifact-sync,artifact-local{display:contents}</style></head>
+<body class="antialiased">
+
+<div id="welcome" class="fixed inset-0 w-full h-full z-[60] flex flex-col items-center justify-center bg-gradient-to-br from-blue-700 via-blue-800 to-indigo-900 text-white text-center p-6">
+  <div class="lw absolute right-4 flex gap-2" style="top:calc(1rem + env(safe-area-inset-top,0px))"></div>
+  <div class="w-20 h-20 rounded-2xl bg-white/15 border border-white/25 flex items-center justify-center text-3xl font-extrabold mb-6">13</div>
+  <h1 class="text-3xl sm:text-5xl font-extrabold" data-i="wel"></h1>
+  <p class="mt-3 text-blue-100" data-i="tag"></p>
+  <div class="mt-10 w-64 h-1.5 rounded-full bg-white/20 overflow-hidden"><div class="bar h-full bg-emerald-400"></div></div>
+</div>
+
+<div id="login" class="fixed inset-0 w-full h-full z-50 hidden bg-white">
+  <div class="lw absolute right-4 flex gap-2" style="top:calc(1rem + env(safe-area-inset-top,0px))"></div>
+  <div class="w-full h-full flex flex-col items-center justify-center p-6 overflow-y-auto">
+    <div class="w-full max-w-md">
+      <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-700 text-white flex items-center justify-center font-extrabold text-2xl mx-auto">13</div>
+      <h2 class="text-2xl sm:text-3xl font-extrabold text-center mt-4" data-i="lt"></h2>
+      <div class="mt-8 space-y-3">
+        <input id="lg-user" data-p="lu" autocomplete="username" class="w-full px-4 py-3.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <input id="lg-pass" type="password" data-p="lp" autocomplete="current-password" class="w-full px-4 py-3.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <p id="lg-err" class="hidden text-sm text-red-600 font-medium" data-i="le"></p>
+        <button onclick="doLogin()" class="w-full py-3.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold" data-i="lin"></button>
+        <button onclick="enter('guest')" class="w-full py-3.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold" data-i="guest"></button>
+      </div>
+      <p class="text-xs text-slate-400 text-center mt-4" data-i="gn"></p>
+    </div>
+  </div>
+</div>
+
+<div id="app" class="hidden flex-col w-full min-h-full">
+  <nav class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm" style="padding-top:env(safe-area-inset-top,0px)">
+    <div class="w-full px-4 h-16 flex items-center justify-between gap-3">
+      <a href="#" class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-700 text-white flex items-center justify-center font-extrabold">13</div>
+        <span class="font-bold text-xl hidden sm:inline" data-i="sch"></span>
+      </a>
+      <div class="hidden lg:flex gap-8 text-sm font-medium text-slate-600">
+        <a href="#statistika" class="hover:text-blue-600" data-i="ns"></a><a href="#direktor" class="hover:text-blue-600" data-i="dt"></a><a href="#oqituvchilar" class="hover:text-blue-600" data-i="nt"></a><a href="#aloqa" class="hover:text-blue-600" data-i="nc"></a>
+      </div>
+      <div class="flex items-center gap-2">
+        <div class="lw flex gap-1"></div>
+        <span id="role-badge" class="hidden sm:inline px-3 py-1 rounded-full text-xs font-bold"></span>
+        <button onclick="logout()" class="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-sm font-semibold" data-i="out"></button>
+      </div>
+    </div>
+  </nav>
+
+  <header class="relative overflow-hidden bg-gradient-to-br from-blue-700 via-blue-800 to-indigo-900 text-white pt-16 pb-28 sm:pt-24 sm:pb-36 text-center px-4">
+    <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/15 border border-white/20 text-blue-100 text-sm font-semibold mb-6">
+      <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span><span data-i="badge"></span></span>
+    <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold mb-6" data-i="sch"></h1>
+    <p class="max-w-2xl mx-auto text-base sm:text-xl text-blue-100" data-i="hero"></p>
+    <div class="mt-8 flex flex-wrap justify-center gap-3">
+      <a href="https://www.instagram.com/13mektep_qipshaq/" target="_blank" rel="noopener" class="px-5 py-3 rounded-2xl bg-white text-slate-900 font-semibold text-sm shadow-lg hover:scale-105 transition-transform inline-flex items-center gap-2"><span class="w-5 h-5 rounded-md bg-gradient-to-tr from-amber-400 via-pink-500 to-purple-600 inline-block"></span>@13mektep_qipshaq</a>
+      <a href="https://www.instagram.com/13_maktab_maslahatchisi/" target="_blank" rel="noopener" class="px-5 py-3 rounded-2xl bg-white text-slate-900 font-semibold text-sm shadow-lg hover:scale-105 transition-transform inline-flex items-center gap-2"><span class="w-5 h-5 rounded-md bg-gradient-to-tr from-amber-400 via-pink-500 to-purple-600 inline-block"></span>@13_maktab_maslahatchisi</a>
+    </div>
+  </header>
+
+  <main class="flex-1 w-full px-4 sm:px-8 lg:px-12">
+    <section id="statistika" class="-mt-16 sm:-mt-20 relative z-10 mb-20 grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="bg-white rounded-3xl p-7 shadow-xl border border-slate-100">
+        <p class="text-sm font-semibold text-slate-500 uppercase tracking-wider" data-i="s1"></p>
+        <p class="text-4xl font-extrabold mt-1"><span id="st-students">123</span> <span class="text-base font-semibold text-blue-600" data-i="u1"></span></p>
+        <div id="st-ctrl" class="hidden mt-3 flex items-center gap-2">
+          <button onclick="chStud(-1)" class="w-9 h-9 rounded-xl bg-slate-100 hover:bg-red-100 text-xl font-bold">−</button>
+          <input id="st-input" type="number" min="0" class="w-24 px-3 py-2 rounded-xl border border-slate-200 text-center font-semibold">
+          <button onclick="chStud(1)" class="w-9 h-9 rounded-xl bg-slate-100 hover:bg-emerald-100 text-xl font-bold">+</button>
+          <button onclick="setStud()" class="px-3 py-2 rounded-xl bg-blue-600 text-white text-xs font-semibold" data-i="save"></button>
+        </div>
+      </div>
+      <div class="bg-white rounded-3xl p-7 shadow-xl border border-slate-100">
+        <p class="text-sm font-semibold text-slate-500 uppercase tracking-wider" data-i="s2"></p>
+        <p class="text-4xl font-extrabold mt-1">42 <span class="text-base font-semibold text-emerald-600" data-i="u2"></span></p>
+        <p class="text-xs text-slate-400 mt-1" data-i="n2"></p>
+      </div>
+      <div class="bg-white rounded-3xl p-7 shadow-xl border border-slate-100">
+        <p class="text-sm font-semibold text-slate-500 uppercase tracking-wider" data-i="s3"></p>
+        <p class="text-4xl font-extrabold mt-1"><span id="st-teachers">12</span> <span class="text-base font-semibold text-amber-600" data-i="u1"></span></p>
+        <p class="text-xs text-slate-400 mt-1" data-i="n3"></p>
+      </div>
+    </section>
+
+    <section id="direktor" class="pb-20 scroll-mt-20">
+      <div class="text-center mb-8">
+        <span class="text-blue-600 font-bold text-sm uppercase tracking-wider" data-i="dl"></span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold mt-1" data-i="dt"></h2>
+      </div>
+      <div id="dir-box" class="w-full max-w-xs mx-auto"></div>
+    </section>
+
+    <section id="oqituvchilar" class="pb-24 scroll-mt-20">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-4">
+        <div>
+          <span class="text-blue-600 font-bold text-sm uppercase tracking-wider" data-i="tl"></span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold mt-1" data-i="th"></h2>
+          <p class="text-slate-500 mt-2" data-i="thint"></p>
+        </div>
+        <div class="flex flex-wrap gap-2 items-center" id="filters"></div>
+      </div>
+      <button id="add-btn" onclick="openForm()" class="hidden mb-6 px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold" data-i="add"></button>
+      <div id="grid" class="grid gap-6 justify-center" style="grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),320px))"></div>
+    </section>
+  </main>
+
+  <footer id="aloqa" class="bg-slate-900 text-slate-300 py-12" style="padding-bottom:calc(3rem + env(safe-area-inset-bottom,0px))">
+    <div class="w-full px-4 flex flex-col md:flex-row items-center justify-between gap-6 text-center">
+      <div><p class="font-bold text-white text-lg" data-i="ft"></p><p class="text-xs text-slate-400" data-i="tag"></p></div>
+      <div class="flex flex-col gap-2 items-center text-sm">
+        <a href="https://www.instagram.com/13mektep_qipshaq/" target="_blank" rel="noopener" class="hover:text-white">Instagram: @13mektep_qipshaq</a>
+        <a href="https://www.instagram.com/13_maktab_maslahatchisi/" target="_blank" rel="noopener" class="hover:text-white">Instagram: @13_maktab_maslahatchisi</a>
+      </div>
+      <div class="text-sm text-slate-400 md:text-right"><p data-i="fa"></p><p class="mt-1"><span data-i="fp"></span> +998 (71) 200-13-13 • © 2026</p></div>
+    </div>
+  </footer>
+</div>
+
+<div id="view" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm" onclick="if(event.target===this)closeM('view')">
+  <div class="bg-white rounded-3xl max-w-xl w-full max-h-[92vh] overflow-y-auto shadow-2xl">
+    <div class="bg-gradient-to-r from-blue-600 to-indigo-700 p-6 text-white flex gap-4 items-center">
+      <img id="v-img" class="w-20 h-20 rounded-2xl object-cover border-2 border-white/40 shrink-0" alt="">
+      <div class="min-w-0 flex-1">
+        <span id="v-cat" class="inline-block px-3 py-1 rounded-full bg-white/20 text-xs font-semibold mb-1"></span>
+        <h3 id="v-name" class="text-xl sm:text-2xl font-extrabold leading-tight"></h3>
+        <p id="v-subj" class="text-blue-100 text-sm mt-1"></p>
+      </div>
+      <button onclick="closeM('view')" class="w-10 h-10 rounded-full bg-white/15 hover:bg-white/25 text-xl self-start" aria-label="X">✕</button>
+    </div>
+    <div class="p-6 space-y-5">
+      <div class="grid grid-cols-2 gap-4">
+        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100"><p class="text-xs font-semibold text-slate-400 uppercase" data-i="exp"></p><p id="v-exp" class="font-bold mt-1"></p></div>
+        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100"><p class="text-xs font-semibold text-slate-400 uppercase" data-i="deg"></p><p id="v-deg" class="font-bold mt-1"></p></div>
+      </div>
+      <div><h4 class="text-sm font-bold uppercase tracking-wider mb-2" data-i="abt"></h4><p id="v-bio" class="text-slate-600 text-sm leading-relaxed"></p></div>
+      <div class="bg-blue-50 rounded-2xl p-4 border border-blue-100"><h4 class="text-xs font-bold text-blue-800 uppercase mb-1" data-i="ach"></h4><p id="v-ach" class="text-sm text-blue-900 font-medium"></p></div>
+      <div class="text-sm text-slate-500"><span data-i="ph"></span>: <span id="v-phone" class="font-semibold text-slate-800"></span></div>
+      <div id="v-admin" class="hidden flex gap-3 pt-3 border-t border-slate-100">
+        <button id="v-edit" class="flex-1 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold" data-i="edit"></button>
+        <button id="v-del" class="flex-1 py-2.5 rounded-xl bg-red-50 hover:bg-red-100 text-red-700 text-sm font-semibold" data-i="del"></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="form" class="fixed inset-0 z-[55] hidden items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
+  <div class="bg-white rounded-3xl max-w-lg w-full max-h-[92vh] overflow-y-auto p-6 shadow-2xl">
+    <h3 id="f-title" class="text-xl font-extrabold mb-4"></h3>
+    <div class="space-y-3 text-sm">
+      <input id="f-name" data-p="pn" class="w-full px-4 py-2.5 rounded-xl border border-slate-200">
+      <input id="f-subj" data-p="ps" class="w-full px-4 py-2.5 rounded-xl border border-slate-200">
+      <select id="f-cat" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white"></select>
+      <div class="grid grid-cols-2 gap-3">
+        <input id="f-exp" data-p="pe" class="px-4 py-2.5 rounded-xl border border-slate-200">
+        <input id="f-deg" data-p="pd" class="px-4 py-2.5 rounded-xl border border-slate-200">
+      </div>
+      <textarea id="f-bio" rows="3" data-p="pb" class="w-full px-4 py-2.5 rounded-xl border border-slate-200"></textarea>
+      <textarea id="f-ach" rows="2" data-p="pa" class="w-full px-4 py-2.5 rounded-xl border border-slate-200"></textarea>
+      <input id="f-phone" data-p="pph" class="w-full px-4 py-2.5 rounded-xl border border-slate-200">
+      <label class="block text-slate-500"><span data-i="fimg"></span>: <input id="f-img" type="file" accept="image/*" class="block mt-1 text-xs"></label>
+    </div>
+    <div class="flex gap-3 mt-5">
+      <button onclick="closeM('form')" class="flex-1 py-2.5 rounded-xl bg-slate-100 font-semibold text-sm" data-i="cancel"></button>
+      <button onclick="saveForm()" class="flex-1 py-2.5 rounded-xl bg-blue-600 text-white font-semibold text-sm" data-i="save"></button>
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="fixed right-5 z-[70] hidden items-center gap-3 bg-slate-900 text-white px-5 py-3.5 rounded-2xl shadow-xl text-sm font-medium" style="bottom:calc(1.25rem + env(safe-area-inset-bottom,0px))">
+  <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span><span id="toast-msg"></span>
+</div>
+
+<script id="seed" type="application/json">{"students":365,"next":15,"teachers":[{"id":0,"dir":true,"name":["Maktab direktori","Мектеп директоры","Директор школы"],"subject":["13-maktab direktori","13-мектеп директоры","Директор школы №13"],"cat":-1,"experience":"—","degree":"—","bio":["Maktab faoliyatini boshqaradi va ta’lim sifati uchun mas’ul.","Мектеп қызметін басқарады және білім сапасына жауапты.","Руководит школой и отвечает за качество образования."],"achievements":["Ma’lumotni «Tahrirlash» tugmasi orqali kiriting.","Деректерді «Өңдеу» батырмасы арқылы енгізіңіз.","Введите данные через кнопку «Редактировать»."],"phone":"+998 (71) 200-13-13","img":null},{"id":1,"name":["Karimova Dilnoza Rustamovna","Каримова Дилноза Рустамовна","Каримова Дилноза Рустамовна"],"subject":["Matematika va informatika o’qituvchisi","Математика және информатика мұғалімі","Учитель математики и информатики"],"cat":0,"experience":["15 yil","15 жыл","15 лет"],"degree":["Oliy toifa","Жоғары санатты","Высшая категория"],"bio":["Murakkab masalalarni oddiy usulda tushuntiradi.","Күрделі есептерді қарапайым тәсілмен түсіндіреді.","Объясняет сложные задачи простым языком."],"achievements":["8 o’quvchisi viloyat olimpiadasi g’olibi.","8 оқушысы облыстық олимпиада жеңімпазы.","8 учеников — победители областной олимпиады."],"phone":"+998 (90) 111-22-33","img":null},{"id":2,"name":["Toshpo’latov Sardor Akmalovich","Тошпўлатов Сардор Акмалович","Тошпўлатов Сардор Акмалович"],"subject":["Fizika va astronomiya o’qituvchisi","Физика және астрономия мұғалімі","Учитель физики и астрономии"],"cat":0,"experience":["11 yil","11 жыл","11 лет"],"degree":["Oliy toifa","Жоғары санатты","Высшая категория"],"bio":["Darsda amaliy tajribalardan keng foydalanadi.","Сабақта практикалық тәжірибелерді кеңінен қолданады.","Широко использует практические опыты на уроках."],"achievements":["«Yil eng yaxshi o’qituvchisi» tuman bosqichi g’olibi.","«Жылдың үздік мұғалімі» аудандық кезеңінің жеңімпазы.","Победитель районного этапа «Лучший учитель года»."],"phone":"+998 (91) 234-56-78","img":null},{"id":3,"name":["Abdullayeva Malika Baxtiyorovna","Абдуллаева Малика Бахтиёровна","Абдуллаева Малика Бахтиёровна"],"subject":["Ona tili va adabiyot o’qituvchisi","Ана тілі және әдебиет мұғалімі","Учитель родного языка и литературы"],"cat":2,"experience":["18 yil","18 жыл","18 лет"],"degree":["Oliy toifa","Жоғары санатты","Высшая категория"],"bio":["Kitobxonlik madaniyati va ijodiy fikrlashni rivojlantiradi.","Кітап оқу мәдениетін және шығармашылық ойлауды дамытады.","Развивает культуру чтения и творческое мышление."],"achievements":["«Yosh ijodkorlar» to’garagi rahbari.","«Жас шығармашылар» үйірмесінің жетекшісі.","Руководитель кружка «Юные творцы»."],"phone":"+998 (93) 345-67-89","img":null},{"id":4,"name":["Rahimov Jasurbek Olimovich","Раҳимов Жасурбек Олимович","Раҳимов Жасурбек Олимович"],"subject":["Kimyo va biologiya o’qituvchisi","Химия және биология мұғалімі","Учитель химии и биологии"],"cat":1,"experience":["9 yil","9 жыл","9 лет"],"degree":["1-toifa","1-санатты","Первая категория"],"bio":["Tabiiy fanlarni hayotiy misollar va ekologik loyihalar orqali o’qitadi.","Жаратылыстану пәндерін өмірлік мысалдар арқылы оқытады.","Преподаёт естественные науки на жизненных примерах и экопроектах."],"achievements":["O’quvchilarining OTMga kirish ko’rsatkichi maktabda eng yuqori.","Оқушыларының жоғары оқу орнына түсу көрсеткіші ең жоғары.","Самый высокий процент поступления учеников в вузы."],"phone":"+998 (94) 456-78-90","img":null},{"id":5,"name":["Nazarova Sevara Shavkatovna","Назарова Севара Шавкатовна","Назарова Севара Шавкатовна"],"subject":["Ingliz tili o’qituvchisi","Ағылшын тілі мұғалімі","Учитель английского языка"],"cat":2,"experience":["8 yil","8 жыл","8 лет"],"degree":["C1 xalqaro sertifikat","C1 халықаралық сертификат","Международный сертификат C1"],"bio":["Interaktiv, so’zlashuvga asoslangan metodika.","Интерактивті, сөйлесуге негізделген әдістеме.","Интерактивная разговорная методика."],"achievements":["IELTS 8.0 sohibi, 20+ o’quvchisi xalqaro sertifikat olgan.","IELTS 8.0 иегері, 20+ оқушысы халықаралық сертификат алған.","IELTS 8.0; 20+ учеников получили международный сертификат."],"phone":"+998 (97) 567-89-01","img":null},{"id":6,"name":["Qodirov Alisher Mansurovich","Қодиров Алишер Мансурович","Қодиров Алишер Мансурович"],"subject":["Geografiya va iqtisodiy bilim asoslari","География және экономикалық білім негіздері","География и основы экономики"],"cat":1,"experience":["14 yil","14 жыл","14 лет"],"degree":["Oliy toifa","Жоғары санатты","Высшая категория"],"bio":["Geografiya va iqtisodni xaritalar va raqamli texnologiyalar bilan o’rgatadi.","География мен экономиканы карталар және цифрлық технологиялар арқылы үйретеді.","Обучает через карты и цифровые технологии."],"achievements":["Respublika «Eng faol ustoz» faxriy yorlig’i sohibi.","Республикалық «Ең белсенді ұстаз» грамотасының иегері.","Обладатель республиканской грамоты «Самый активный наставник»."],"phone":"+998 (99) 678-90-12","img":null},{"id":7,"name":["Yusupova Nodira Xamidovna","Юсупова Нодира Хамидовна","Юсупова Нодира Хамидовна"],"subject":["Tarix o’qituvchisi","Тарих мұғалімі","Учитель истории"],"cat":3,"experience":["16 yil","16 жыл","16 лет"],"degree":["Oliy toifa","Жоғары санатты","Высшая категория"],"bio":["Tarixiy voqealarni hikoya va munozara orqali qiziqarli yetkazadi.","Тарихи оқиғаларды әңгіме және пікірталас арқылы жеткізеді.","Увлекательно подаёт историю через рассказ и дискуссии."],"achievements":["Tarix olimpiadasi tuman g’oliblarining ustozi.","Аудандық тарих олимпиадасы жеңімпаздарының ұстазы.","Наставник победителей районной олимпиады по истории."],"phone":"+998 (90) 222-33-44","img":null},{"id":8,"name":["Ergashev Bobur Anvarovich","Эргашев Бобур Анварович","Эргашев Бобур Анварович"],"subject":["Algebra va geometriya o’qituvchisi","Алгебра және геометрия мұғалімі","Учитель алгебры и геометрии"],"cat":0,"experience":["7 yil","7 жыл","7 лет"],"degree":["1-toifa","1-санатты","Первая категория"],"bio":["Mantiqiy fikrlashni mashq qildiruvchi masalalar to’plami muallifi.","Логикалық ойлауды жаттықтыратын есептер жинағының авторы.","Автор сборника задач на логическое мышление."],"achievements":["Yosh o’qituvchilar tanlovi g’olibi.","Жас мұғалімдер байқауының жеңімпазы.","Победитель конкурса молодых учителей."],"phone":"+998 (91) 333-44-55","img":null},{"id":9,"name":["Sodiqova Gulnora Karimovna","Содиқова Гулнора Каримовна","Содиқова Гулнора Каримовна"],"subject":["Rus tili o’qituvchisi","Орыс тілі мұғалімі","Учитель русского языка"],"cat":2,"experience":["20 yil","20 жыл","20 лет"],"degree":["Oliy toifa","Жоғары санатты","Высшая категория"],"bio":["Rus tilli sinflarda nutq va yozuv madaniyatini shakllantiradi.","Орыс тілді сыныптарда сөйлеу және жазу мәдениетін қалыптастырады.","Формирует культуру речи и письма в русскоязычных классах."],"achievements":["Respublika metodik seminarlari ishtirokchisi.","Республикалық әдістемелік семинарлардың қатысушысы.","Участница республиканских методических семинаров."],"phone":"+998 (93) 444-55-66","img":null},{"id":10,"name":["Mirzayev Otabek Ravshanovich","Мирзаев Отабек Равшанович","Мирзаев Отабек Равшанович"],"subject":["Biologiya va ekologiya o’qituvchisi","Биология және экология мұғалімі","Учитель биологии и экологии"],"cat":1,"experience":["10 yil","10 жыл","10 лет"],"degree":["1-toifa","1-санатты","Первая категория"],"bio":["Maktab ekologik klubi bilan amaliy loyihalar o’tkazadi.","Мектептің экологиялық клубымен практикалық жобалар өткізеді.","Проводит практические проекты с экологическим клубом."],"achievements":["«Yashil maktab» loyihasi muallifi.","«Жасыл мектеп» жобасының авторы.","Автор проекта «Зелёная школа»."],"phone":"+998 (94) 555-66-77","img":null},{"id":11,"name":["Hasanova Zilola Ilhomovna","Хасанова Зилола Илҳомовна","Хасанова Зилола Илҳомовна"],"subject":["Huquq va fuqarolik jamiyati asoslari","Құқық және азаматтық қоғам негіздері","Право и основы гражданского общества"],"cat":3,"experience":["12 yil","12 жыл","12 лет"],"degree":["Oliy toifa","Жоғары санатты","Высшая категория"],"bio":["O’quvchilarda huquqiy madaniyat va fuqarolik faolligini oshiradi.","Оқушыларда құқықтық мәдениет пен белсенділікті арттырады.","Повышает правовую культуру и гражданскую активность."],"achievements":["Tuman «Yosh huquqshunos» tanlovi tashkilotchisi.","Аудандық «Жас заңгер» байқауының ұйымдастырушысы.","Организатор районного конкурса «Юный юрист»."],"phone":"+998 (97) 666-77-88","img":null},{"id":12,"name":["Normatov Behzod Sherzodovich","Норматов Бехзод Шерзодович","Норматов Бехзод Шерзодович"],"subject":["Informatika va robototexnika","Информатика және робототехника","Информатика и робототехника"],"cat":0,"experience":["6 yil","6 жыл","6 лет"],"degree":["1-toifa","1-санатты","Первая категория"],"bio":["Dasturlash va robototexnika to’garaklarini olib boradi.","Бағдарламалау және робототехника үйірмелерін жүргізеді.","Ведёт кружки программирования и робототехники."],"achievements":["Viloyat robototexnika musobaqasi sovrindori.","Облыстық робототехника жарысының жүлдегері.","Призёр областных соревнований по робототехнике."],"phone":"+998 (99) 777-88-99","img":null},{"id":13,"cat":0,"img":null,"name":"Yusupova Nodira Hamidovna","subject":"Tarix o‘qituvchisi","experience":"1","degree":"Oliy toifali","bio":"","achievements":"","phone":""},{"id":14,"cat":2,"img":null,"name":"Yusupova Nodira Hamidovna","subject":"Tarix o‘qituvchisi","experience":"","degree":"","bio":"","achievements":"","phone":""}]}</script>
+<script>
+const SRC='<!DOCTYPE html>\n'+document.documentElement.outerHTML.replace(/<style>\*, ::before, ::after\{[\s\S]*?<\/style>/,'').replace(/ data-theme="[^"]*"/,'').replace(/ style="color-scheme: (light|dark);"/,'');
+const KEY='maktab13_v2', LOGIN='legenda123', PASS='12345678';
+/* Tillar tartibi: 0 = o’zbek, 1 = qozoq, 2 = rus */
+const I={
+sch:['13-maktab','13-мектеп','Школа №13'],
+wel:['13-maktabga xush kelibsiz!','13-мектепке қош келдіңіздер!','Добро пожаловать в школу №13!'],
+tag:['Bilim — kelajak poydevori','Білім — болашақтың іргетасы','Знания — фундамент будущего'],
+lt:['Tizimga kirish','Жүйеге кіру','Вход в систему'],
+lu:['Login','Логин','Логин'],lp:['Parol','Құпиясөз','Пароль'],
+le:['Login yoki parol xato!','Логин немесе құпиясөз қате!','Неверный логин или пароль!'],
+lin:['Kirish','Кіру','Войти'],guest:['Mehmon sifatida kirish','Қонақ ретінде кіру','Войти как гость'],
+gn:['Mehmon faqat ko’ra oladi, hech narsani o’zgartira olmaydi.','Қонақ тек көре алады, ештеңені өзгерте алмайды.','Гость может только просматривать и ничего не может изменить.'],
+ns:['Statistika','Статистика','Статистика'],nt:['O’qituvchilar','Мұғалімдер','Учителя'],nc:['Aloqa','Байланыс','Контакты'],
+adm:['Admin','Әкімші','Админ'],gv:['Mehmon (faqat ko’rish)','Қонақ (тек көру)','Гость (только просмотр)'],out:['Chiqish','Шығу','Выйти'],
+badge:['Zamonaviy ta’lim va tarbiya markazi','Заманауи білім мен тәрбие орталығы','Современный центр образования и воспитания'],
+hero:['Kelajak yaratuvchilari shakllanadigan bilim maskani. O’quvchilar, sinflar va fidoyi ustozlarimiz haqida barcha ma’lumot bir joyda.','Болашақ жасампаздары қалыптасатын білім ордасы. Оқушылар, сыныптар және фидайы ұстаздарымыз туралы барлық ақпарат бір жерде.','Образовательный центр, где формируются созидатели будущего. Вся информация об учениках, классах и наших преданных педагогах — в одном месте.'],
+s1:['O’quvchilar soni','Оқушылар саны','Количество учеников'],s2:['Sinflar soni','Сыныптар саны','Количество классов'],s3:['O’qituvchilar soni','Мұғалімдер саны','Количество учителей'],
+u1:['nafar','адам','чел.'],u2:['sinf','сынып','классов'],
+n2:['O’zbek va rus tilli sinflar','Өзбек және орыс тілді сыныптар','Узбекские и русские классы'],
+n3:['Oliy va 1-toifali ustozlar','Жоғары және 1-санатты ұстаздар','Педагоги высшей и первой категории'],
+dl:['Maktab rahbari','Мектеп басшысы','Руководитель школы'],dt:['Direktor','Директор','Директор'],
+tl:['Bizning jamoa','Біздің команда','Наша команда'],th:['Maktab o’qituvchilari','Мектеп мұғалімдері','Учителя школы'],
+thint:['To’liq ma’lumot uchun o’qituvchi rasmini bosing.','Толық ақпарат алу үшін мұғалімнің суретін басыңыз.','Нажмите на фото учителя, чтобы узнать больше.'],
+add:['+ O’qituvchi qo’shish','+ Мұғалім қосу','+ Добавить учителя'],all:['Hammasi','Барлығы','Все'],
+c0:['Aniq fanlar','Нақты ғылымдар','Точные науки'],c1:['Tabiiy fanlar','Жаратылыстану','Естественные науки'],c2:['Filologiya','Филология','Филология'],c3:['Ijtimoiy fanlar','Қоғамдық ғылымдар','Общественные науки'],
+more:['To’liq ma’lumot →','Толық ақпарат →','Подробнее →'],
+exp:['Ish tajribasi','Жұмыс тәжірибесі','Стаж работы'],deg:['Malaka toifasi','Біліктілік санаты','Квалификация'],
+abt:['O’qituvchi haqida','Мұғалім туралы','О преподавателе'],ach:['Yutuqlari','Жетістіктері','Достижения'],ph:['Telefon','Телефон','Телефон'],
+edit:['Tahrirlash','Өңдеу','Редактировать'],del:['O’chirish','Жою','Удалить'],
+cf:['Bu o’qituvchini o’chirmoqchimisiz?','Бұл мұғалімді жойғыңыз келе ме?','Удалить этого учителя?'],
+deld:['O’qituvchi o’chirildi','Мұғалім жойылды','Учитель удалён'],cancel:['Bekor qilish','Бас тарту','Отмена'],save:['Saqlash','Сақтау','Сохранить'],
+ft:['13-umumiy o’rta ta’lim maktabi','13-жалпы орта білім беру мектебі','Общеобразовательная школа №13'],
+fa:['Manzil: Maktab ko’chasi, 13-uy','Мекенжайы: Мектеп көшесі, 13-үй','Адрес: ул. Школьная, д. 13'],fp:['Telefon:','Телефон:','Телефон:'],
+at:['O’qituvchi qo’shish','Мұғалім қосу','Добавить учителя'],et:['Tahrirlash','Өңдеу','Редактирование'],
+pn:['Ism-familiya','Аты-жөні','ФИО'],ps:['Fani','Пәні','Предмет'],pe:['Tajriba (masalan 10 yil)','Тәжірибе (мысалы 10 жыл)','Стаж (например 10 лет)'],
+pd:['Toifasi','Санаты','Категория'],pb:['Ma’lumot','Ақпарат','Информация'],pa:['Yutuqlari','Жетістіктері','Достижения'],pph:['Telefon','Телефон','Телефон'],
+fimg:['Rasm (majburiy emas)','Сурет (міндетті емес)','Фото (необязательно)'],
+saved:['Saqlandi!','Сақталды!','Сохранено!'],noname:['Ismni kiriting','Атын енгізіңіз','Введите имя'],badnum:['Noto’g’ri son','Қате сан','Неверное число'],
+upd:['O’quvchilar soni yangilandi','Оқушылар саны жаңартылды','Число учеников обновлено'],full:['Xotira to’ldi: rasm saqlanmadi','Жад толды: сурет сақталмады','Память заполнена: фото не сохранено']
+};
+const LC=['uz','kk','ru'];
+let L=0;try{const l=parseInt(localStorage.getItem('maktab13_lang'),10);if(l>=0&&l<3)L=l}catch(e){}
+const t=k=>I[k][L], tr=v=>Array.isArray(v)?v[L]:(v||'');
+let role=null, filter='all', editId=null, viewId=null;
+
+const avatar=(name,i)=>{
+  const h=(i*53)%360, ini=name.split(' ').slice(0,2).map(w=>w[0]).join('');
+  return 'data:image/svg+xml;utf8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="hsl('+h+',70%,58%)"/><stop offset="1" stop-color="hsl('+((h+40)%360)+',70%,34%)"/></linearGradient></defs><rect width="200" height="200" fill="url(#g)"/><circle cx="100" cy="76" r="34" fill="#fff" fill-opacity=".88"/><path d="M34 200c4-44 32-64 66-64s62 20 66 64z" fill="#fff" fill-opacity=".88"/><text x="100" y="86" text-anchor="middle" font-size="26" font-weight="700" fill="hsl('+h+',60%,28%)" font-family="sans-serif">'+ini+'</text></svg>');
+};
+const DEG=[['Oliy toifa','Жоғары санатты','Высшая категория'],['1-toifa','1-санатты','Первая категория'],['C1 xalqaro sertifikat','C1 халықаралық сертификат','Международный сертификат C1']];
+/* [lotin ism, kirill ism, toifa, tajriba(yil), daraja, fan[3], haqida[3], yutuq[3], telefon] */
+const D=[
+['Karimova Dilnoza Rustamovna','Каримова Дилноза Рустамовна',0,15,0,['Matematika va informatika o’qituvchisi','Математика және информатика мұғалімі','Учитель математики и информатики'],['Murakkab masalalarni oddiy usulda tushuntiradi.','Күрделі есептерді қарапайым тәсілмен түсіндіреді.','Объясняет сложные задачи простым языком.'],['8 o’quvchisi viloyat olimpiadasi g’olibi.','8 оқушысы облыстық олимпиада жеңімпазы.','8 учеников — победители областной олимпиады.'],'+998 (90) 111-22-33'],
+['Toshpo’latov Sardor Akmalovich','Тошпўлатов Сардор Акмалович',0,11,0,['Fizika va astronomiya o’qituvchisi','Физика және астрономия мұғалімі','Учитель физики и астрономии'],['Darsda amaliy tajribalardan keng foydalanadi.','Сабақта практикалық тәжірибелерді кеңінен қолданады.','Широко использует практические опыты на уроках.'],['«Yil eng yaxshi o’qituvchisi» tuman bosqichi g’olibi.','«Жылдың үздік мұғалімі» аудандық кезеңінің жеңімпазы.','Победитель районного этапа «Лучший учитель года».'],'+998 (91) 234-56-78'],
+['Abdullayeva Malika Baxtiyorovna','Абдуллаева Малика Бахтиёровна',2,18,0,['Ona tili va adabiyot o’qituvchisi','Ана тілі және әдебиет мұғалімі','Учитель родного языка и литературы'],['Kitobxonlik madaniyati va ijodiy fikrlashni rivojlantiradi.','Кітап оқу мәдениетін және шығармашылық ойлауды дамытады.','Развивает культуру чтения и творческое мышление.'],['«Yosh ijodkorlar» to’garagi rahbari.','«Жас шығармашылар» үйірмесінің жетекшісі.','Руководитель кружка «Юные творцы».'],'+998 (93) 345-67-89'],
+['Rahimov Jasurbek Olimovich','Раҳимов Жасурбек Олимович',1,9,1,['Kimyo va biologiya o’qituvchisi','Химия және биология мұғалімі','Учитель химии и биологии'],['Tabiiy fanlarni hayotiy misollar va ekologik loyihalar orqali o’qitadi.','Жаратылыстану пәндерін өмірлік мысалдар арқылы оқытады.','Преподаёт естественные науки на жизненных примерах и экопроектах.'],['O’quvchilarining OTMga kirish ko’rsatkichi maktabda eng yuqori.','Оқушыларының жоғары оқу орнына түсу көрсеткіші ең жоғары.','Самый высокий процент поступления учеников в вузы.'],'+998 (94) 456-78-90'],
+['Nazarova Sevara Shavkatovna','Назарова Севара Шавкатовна',2,8,2,['Ingliz tili o’qituvchisi','Ағылшын тілі мұғалімі','Учитель английского языка'],['Interaktiv, so’zlashuvga asoslangan metodika.','Интерактивті, сөйлесуге негізделген әдістеме.','Интерактивная разговорная методика.'],['IELTS 8.0 sohibi, 20+ o’quvchisi xalqaro sertifikat olgan.','IELTS 8.0 иегері, 20+ оқушысы халықаралық сертификат алған.','IELTS 8.0; 20+ учеников получили международный сертификат.'],'+998 (97) 567-89-01'],
+['Qodirov Alisher Mansurovich','Қодиров Алишер Мансурович',1,14,0,['Geografiya va iqtisodiy bilim asoslari','География және экономикалық білім негіздері','География и основы экономики'],['Geografiya va iqtisodni xaritalar va raqamli texnologiyalar bilan o’rgatadi.','География мен экономиканы карталар және цифрлық технологиялар арқылы үйретеді.','Обучает через карты и цифровые технологии.'],['Respublika «Eng faol ustoz» faxriy yorlig’i sohibi.','Республикалық «Ең белсенді ұстаз» грамотасының иегері.','Обладатель республиканской грамоты «Самый активный наставник».'],'+998 (99) 678-90-12'],
+['Yusupova Nodira Xamidovna','Юсупова Нодира Хамидовна',3,16,0,['Tarix o’qituvchisi','Тарих мұғалімі','Учитель истории'],['Tarixiy voqealarni hikoya va munozara orqali qiziqarli yetkazadi.','Тарихи оқиғаларды әңгіме және пікірталас арқылы жеткізеді.','Увлекательно подаёт историю через рассказ и дискуссии.'],['Tarix olimpiadasi tuman g’oliblarining ustozi.','Аудандық тарих олимпиадасы жеңімпаздарының ұстазы.','Наставник победителей районной олимпиады по истории.'],'+998 (90) 222-33-44'],
+['Ergashev Bobur Anvarovich','Эргашев Бобур Анварович',0,7,1,['Algebra va geometriya o’qituvchisi','Алгебра және геометрия мұғалімі','Учитель алгебры и геометрии'],['Mantiqiy fikrlashni mashq qildiruvchi masalalar to’plami muallifi.','Логикалық ойлауды жаттықтыратын есептер жинағының авторы.','Автор сборника задач на логическое мышление.'],['Yosh o’qituvchilar tanlovi g’olibi.','Жас мұғалімдер байқауының жеңімпазы.','Победитель конкурса молодых учителей.'],'+998 (91) 333-44-55'],
+['Sodiqova Gulnora Karimovna','Содиқова Гулнора Каримовна',2,20,0,['Rus tili o’qituvchisi','Орыс тілі мұғалімі','Учитель русского языка'],['Rus tilli sinflarda nutq va yozuv madaniyatini shakllantiradi.','Орыс тілді сыныптарда сөйлеу және жазу мәдениетін қалыптастырады.','Формирует культуру речи и письма в русскоязычных классах.'],['Respublika metodik seminarlari ishtirokchisi.','Республикалық әдістемелік семинарлардың қатысушысы.','Участница республиканских методических семинаров.'],'+998 (93) 444-55-66'],
+['Mirzayev Otabek Ravshanovich','Мирзаев Отабек Равшанович',1,10,1,['Biologiya va ekologiya o’qituvchisi','Биология және экология мұғалімі','Учитель биологии и экологии'],['Maktab ekologik klubi bilan amaliy loyihalar o’tkazadi.','Мектептің экологиялық клубымен практикалық жобалар өткізеді.','Проводит практические проекты с экологическим клубом.'],['«Yashil maktab» loyihasi muallifi.','«Жасыл мектеп» жобасының авторы.','Автор проекта «Зелёная школа».'],'+998 (94) 555-66-77'],
+['Hasanova Zilola Ilhomovna','Хасанова Зилола Илҳомовна',3,12,0,['Huquq va fuqarolik jamiyati asoslari','Құқық және азаматтық қоғам негіздері','Право и основы гражданского общества'],['O’quvchilarda huquqiy madaniyat va fuqarolik faolligini oshiradi.','Оқушыларда құқықтық мәдениет пен белсенділікті арттырады.','Повышает правовую культуру и гражданскую активность.'],['Tuman «Yosh huquqshunos» tanlovi tashkilotchisi.','Аудандық «Жас заңгер» байқауының ұйымдастырушысы.','Организатор районного конкурса «Юный юрист».'],'+998 (97) 666-77-88'],
+['Normatov Behzod Sherzodovich','Норматов Бехзод Шерзодович',0,6,1,['Informatika va robototexnika','Информатика және робототехника','Информатика и робототехника'],['Dasturlash va robototexnika to’garaklarini olib boradi.','Бағдарламалау және робототехника үйірмелерін жүргізеді.','Ведёт кружки программирования и робототехники.'],['Viloyat robototexnika musobaqasi sovrindori.','Облыстық робототехника жарысының жүлдегері.','Призёр областных соревнований по робототехнике.'],'+998 (99) 777-88-99']
+];
+function seed(){
+  const dir={id:0,dir:true,name:['Maktab direktori','Мектеп директоры','Директор школы'],subject:['13-maktab direktori','13-мектеп директоры','Директор школы №13'],cat:-1,experience:'—',degree:'—',bio:['Maktab faoliyatini boshqaradi va ta’lim sifati uchun mas’ul.','Мектеп қызметін басқарады және білім сапасына жауапты.','Руководит школой и отвечает за качество образования.'],achievements:['Ma’lumotni «Tahrirlash» tugmasi orqali kiriting.','Деректерді «Өңдеу» батырмасы арқылы енгізіңіз.','Введите данные через кнопку «Редактировать».'],phone:'+998 (71) 200-13-13',img:null};
+  return{students:123,next:13,teachers:[dir].concat(D.map((d,i)=>({id:i+1,name:[d[0],d[1],d[1]],subject:d[5],cat:d[2],experience:[d[3]+' yil',d[3]+' жыл',d[3]+' лет'],degree:DEG[d[4]],bio:d[6],achievements:d[7],phone:d[8],img:null})))};
+}
+function load(){try{const s=JSON.parse(document.getElementById('seed').textContent.trim());if(s&&s.teachers)return s}catch(e){}return seed()}
+Object.assign(I,{sv:['Hamma uchun saqlanmoqda…','Барлығы үшін сақталуда…','Сохраняется для всех…'],sverr:['Saqlanmadi: hamma uchun saqlash uchun sayt egasi o’z Claude hisobiga kirgan bo’lishi kerak.','Сақталмады: өзгерістерді барлығы үшін тек сайт иесі (Claude аккаунтымен) сақтай алады.','Не сохранено: изменения для всех может сохранить только владелец сайта (с аккаунтом Claude).']});
+let pt=null;
+function save(){clearTimeout(pt);pt=setTimeout(pushAll,1200);toast(t('sv'))}
+async function pushAll(){try{if(!window.claude)throw 0;const a=await claude.use('artifact');if(!a)throw 0;const html=SRC.replace(/(<script id="seed" type="application\/json">)[\s\S]*?(<\/script>)/,(m,x,y)=>x+JSON.stringify(S).replace(/</g,'\\u003c')+y);await a.publish(html)}catch(e){toast(t('sverr'))}}
+let S=load();
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function toast(m){$('toast-msg').textContent=m;$('toast').classList.replace('hidden','flex');setTimeout(()=>$('toast').classList.replace('flex','hidden'),3000)}
+const show=(id,flex)=>{$(id).classList.remove('hidden');if(flex)$(id).classList.add('flex')};
+const hide=id=>{$(id).classList.add('hidden');$(id).classList.remove('flex')};
+const closeM=hide;
+const isAdmin=()=>role==='admin';
+const catName=c=>c<0?t('dt'):t('c'+c);
+const teachers=()=>S.teachers.filter(x=>!x.dir);
+
+function applyLang(){
+  document.documentElement.lang=LC[L];document.title=t('sch');
+  document.querySelectorAll('[data-i]').forEach(e=>e.textContent=t(e.dataset.i));
+  document.querySelectorAll('[data-p]').forEach(e=>e.placeholder=t(e.dataset.p));
+  document.querySelectorAll('.lw').forEach(c=>c.innerHTML=['UZ','ҚАЗ','РУС'].map((n,i)=>'<button data-l="'+i+'" class="px-3 py-1.5 rounded-lg text-xs font-bold border '+(i===L?'bg-blue-600 text-white border-blue-600':'bg-white text-slate-700 border-slate-200 hover:bg-slate-100')+'">'+n+'</button>').join(''));
+  if(role){const b=$('role-badge');b.textContent=t(isAdmin()?'adm':'gv');render()}
+}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-l]');if(b){L=+b.dataset.l;try{localStorage.setItem('maktab13_lang',L)}catch(x){}applyLang()}});
+
+let SR=null;try{SR=sessionStorage.getItem('m13_role')}catch(e){}
+if(SR){hide('welcome');enter(SR)}else setTimeout(()=>{hide('welcome');show('login',true)},5000);
+function doLogin(){
+  if($('lg-user').value.trim()===LOGIN&&$('lg-pass').value===PASS){enter('admin')}
+  else $('lg-err').classList.remove('hidden');
+}
+['lg-user','lg-pass'].forEach(i=>$(i).addEventListener('keydown',e=>{if(e.key==='Enter')doLogin()}));
+function enter(r){role=r;try{sessionStorage.setItem('m13_role',r)}catch(e){}hide('login');show('app',true);
+  const b=$('role-badge');
+  b.className='hidden sm:inline px-3 py-1 rounded-full text-xs font-bold '+(isAdmin()?'bg-emerald-100 text-emerald-700':'bg-amber-100 text-amber-700');
+  $('st-ctrl').classList.toggle('hidden',!isAdmin());
+  $('add-btn').classList.toggle('hidden',!isAdmin());
+  window.scrollTo(0,0);applyLang()}
+function logout(){role=null;try{sessionStorage.removeItem('m13_role')}catch(e){}hide('app');$('lg-pass').value='';$('lg-err').classList.add('hidden');show('login',true)}
+
+function card(x,big){
+  const nm=esc(tr(x.name));
+  return '<div class="bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-xl border '+(big?'border-blue-200 shadow-xl':'border-slate-100')+' transition-shadow flex flex-col">'+
+  '<div class="relative h-56 cursor-pointer overflow-hidden" data-open="'+x.id+'">'+
+  '<img src="'+(x.img||avatar(tr(x.name),x.id+1))+'" alt="'+nm+'" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">'+
+  '<span class="absolute top-3 left-3 px-3 py-1 rounded-full bg-white/90 text-slate-700 text-xs font-bold">'+esc(catName(x.cat))+'</span></div>'+
+  '<div class="p-5 flex-1 flex flex-col justify-between"><div><h3 class="font-bold text-slate-900 cursor-pointer hover:text-blue-600'+(big?' text-xl text-center':'')+'" data-open="'+x.id+'">'+nm+'</h3>'+
+  '<p class="text-sm text-slate-500 mt-1'+(big?' text-center':'')+'">'+esc(tr(x.subject))+'</p></div>'+
+  '<button data-open="'+x.id+'" class="mt-4 text-left text-sm font-semibold text-blue-600 hover:text-blue-700'+(big?' text-center w-full':'')+'">'+t('more')+'</button></div></div>';
+}
+function render(){
+  const T=teachers(), dir=S.teachers.find(x=>x.dir);
+  $('st-students').textContent=S.students;$('st-input').value=S.students;
+  $('st-teachers').textContent=T.length;
+  $('filters').innerHTML=['all',0,1,2,3].map(c=>'<button data-f="'+c+'" class="px-4 py-2 rounded-xl text-sm font-semibold border '+(String(c)===String(filter)?'bg-blue-600 text-white border-blue-600':'bg-white text-slate-600 border-slate-200 hover:bg-slate-100')+'">'+(c==='all'?t('all'):t('c'+c))+'</button>').join('');
+  const list=filter==='all'?T:T.filter(x=>String(x.cat)===String(filter));
+  $('grid').innerHTML=list.map(x=>card(x,false)).join('');
+  $('dir-box').innerHTML=dir?card(dir,true):'';
+}
+$('filters').addEventListener('click',e=>{const b=e.target.closest('[data-f]');if(b){filter=b.dataset.f;render()}});
+['grid','dir-box'].forEach(i=>$(i).addEventListener('click',e=>{const o=e.target.closest('[data-open]');if(o)openView(+o.dataset.open)}));
+function openView(id){
+  const x=S.teachers.find(y=>y.id===id);if(!x)return;viewId=id;
+  $('v-img').src=x.img||avatar(tr(x.name),x.id+1);
+  $('v-cat').textContent=catName(x.cat);$('v-name').textContent=tr(x.name);$('v-subj').textContent=tr(x.subject);
+  $('v-exp').textContent=tr(x.experience);$('v-deg').textContent=tr(x.degree);$('v-bio').textContent=tr(x.bio);
+  $('v-ach').textContent=tr(x.achievements);$('v-phone').textContent=x.phone;
+  $('v-admin').classList.toggle('hidden',!isAdmin());
+  $('v-del').classList.toggle('hidden',!!x.dir);
+  show('view',true);
+}
+$('v-edit').onclick=()=>{if(isAdmin()){closeM('view');openForm(viewId)}};
+$('v-del').onclick=()=>{if(!isAdmin())return;const x=S.teachers.find(y=>y.id===viewId);if(!x||x.dir)return;if(confirm(t('cf'))){S.teachers=S.teachers.filter(y=>y.id!==viewId);save();closeM('view');render();toast(t('deld'))}};
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeM('view');closeM('form')}});
+function chStud(d){if(!isAdmin())return;S.students=Math.max(0,S.students+d);save();render()}
+function setStud(){if(!isAdmin())return;const n=parseInt($('st-input').value,10);if(isNaN(n)||n<0)return toast(t('badnum'));S.students=n;save();render();toast(t('upd'))}
+const FM=[['name','name'],['subj','subject'],['exp','experience'],['deg','degree'],['bio','bio'],['ach','achievements'],['phone','phone']];
+function openForm(id){
+  if(!isAdmin())return;editId=id||null;
+  const x=id?S.teachers.find(y=>y.id===id):{name:'',subject:'',cat:0,experience:'',degree:'',bio:'',achievements:'',phone:''};
+  $('f-title').textContent=t(id?'et':'at');
+  $('f-cat').innerHTML=[0,1,2,3].map(c=>'<option value="'+c+'"'+(c===x.cat?' selected':'')+'>'+t('c'+c)+'</option>').join('');
+  $('f-cat').classList.toggle('hidden',!!x.dir);
+  FM.forEach(([f,k])=>$('f-'+f).value=tr(x[k]));
+  $('f-img').value='';show('form',true);
+}
+function saveForm(){
+  if(!isAdmin())return;
+  const name=$('f-name').value.trim();if(!name)return toast(t('noname'));
+  const x=editId?S.teachers.find(y=>y.id===editId):null;
+  const keep=(k,v)=>x&&v===tr(x[k])?x[k]:v;
+  const data={};FM.forEach(([f,k])=>data[k]=keep(k,$('f-'+f).value.trim()));
+  const done=img=>{
+    if(x){Object.assign(x,data);if(!x.dir)x.cat=+$('f-cat').value;if(img)x.img=img}
+    else S.teachers.push(Object.assign({id:S.next++,cat:+$('f-cat').value,img:img||null},data));
+    save();closeM('form');render();toast(t('saved'))};
+  const f=$('f-img').files[0];
+  if(f){const r=new FileReader();r.onload=e=>{const im=new Image();im.onload=()=>{const k=Math.min(1,640/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);c.getContext('2d').drawImage(im,0,0,c.width,c.height);done(c.toDataURL('image/jpeg',.82))};im.onerror=()=>done(null);im.src=e.target.result};r.readAsDataURL(f)}else done(null);
+}
+applyLang();
+</script></body></html>
